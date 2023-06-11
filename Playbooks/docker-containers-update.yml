@@ -1,0 +1,12 @@
+---
+- name: Run Watchtower container to update all containers using the latest tag
+  hosts: all
+  become: yes
+  tasks:
+    - name: Run Watchtower
+      command: >
+        docker run --rm 
+        --name watchtower 
+        -v /var/run/docker.sock:/var/run/docker.sock 
+        containrrr/watchtower 
+        --run-once
