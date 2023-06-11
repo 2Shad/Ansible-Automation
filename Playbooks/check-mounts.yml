@@ -1,0 +1,19 @@
+---
+- name: Check if directories have contents
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check directory contents
+      command: ls -A {{ item }}
+      register: dir_contents
+      loop:
+        - /mnt/AppData
+        - /mnt/Archive
+        - /mnt/Downloads
+        - /mnt/Media
+        - /mnt/VS-Code
+    - name: Show directory contents
+      debug:
+        msg: "Directory {{ item.item }} contains: {{ item.stdout_lines }}"
+      loop: "{{ dir_contents.results }}"
+      when: item.stdout_lines
