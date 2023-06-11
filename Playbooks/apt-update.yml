@@ -1,10 +1,9 @@
 ---
 - hosts: all
-  become: yes
-  become_user: root
-  become_method: enable
+  gather_facts: yes
   tasks:
-    - name: update apt packages
-      apt:
-        upgrade: yes
-        update_cache: yes
+  - name: Update and upgrade apt packages
+    become: true
+    apt:
+      upgrade: yes
+      update_cache: yes
