@@ -4,4 +4,4 @@
   become: yes
   tasks:
     - name: Stop containers
-      command: docker stop guacamole radarr-bluray 4K-radarr radarr 4K-sonarr sonarr jackett binhex-qbittorrentvpn jellyseerr portainer jellyfin
+      command: docker stop guacamole radarr-bluray 4K-radarr radarr 4K-sonarr sonarr jackett binhex-qbittorrentvpn jellyseerr portainer jellyfin code-server
