@@ -4,7 +4,9 @@
   become: yes
   tasks:
     - name: Check directory contents
-      command: ls -A {{ item }}
+      find:
+        paths: "{{ item }}"
+        file_type: any
       register: dir_contents
       loop:
         - /mnt/AppData
@@ -12,8 +14,8 @@
         - /mnt/Downloads
         - /mnt/Media
         - /mnt/VS-Code
-    - name: Show directory contents
-      debug:
-        msg: "Directory {{ item.item }} contains: {{ item.stdout_lines }}"
+    - name: Fail if directory is empty
+      fail:
+        msg: "Directory {{ item.item }} is empty"
       loop: "{{ dir_contents.results }}"
-      when: item.stdout_lines
+      when: item.files|length == 0
