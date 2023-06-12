@@ -2,6 +2,7 @@
 - name: Run Watchtower container to update all containers using the latest tag
   hosts: all
   become: yes
+  gather_facts: yes
   tasks:
     - name: Run Watchtower
       command: >
@@ -9,4 +10,3 @@
         --name watchtower 
         -v /var/run/docker.sock:/var/run/docker.sock 
         containrrr/watchtower 
-        --run-once
